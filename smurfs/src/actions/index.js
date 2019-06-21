@@ -45,6 +45,21 @@ export const getData = () => dispatch => {
       });
   };
 
+  export const UPDATE_SMURF_START = 'UPDATE_SMURF_START';
+  export const UPDATE_SMURF_SUCCESS = 'UPDATE_SMURF_SUCCESS';
+  export const UPDATE_SMURF_FAILURE = 'UPDATE_SMURF_FAILURE';
+  export const updateSmurf = (item) => dispatch => {
+    dispatch({ type: UPDATE_SMURF_START });
+    axios
+      .put(`http://localhost:3333/smurfs/${item.id}`, item)
+      .then(res => {              
+        dispatch({ type: UPDATE_SMURF_SUCCESS, payload: res.data });
+      })
+      .catch(err => {      
+        dispatch({ type: UPDATE_SMURF_FAILURE, payload: err.response.data.error });
+      });
+  };
+
 
 
 
